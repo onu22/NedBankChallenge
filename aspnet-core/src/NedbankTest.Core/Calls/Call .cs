@@ -27,9 +27,9 @@ namespace NedbankTest.Calls
         [StringLength(MaxDescriptionLength)]
         public virtual string Description { get; protected set; }
 
-        [ForeignKey("UserId")]
-        public virtual User User { get; protected set; }
-        public virtual long UserId { get; protected set; }
+        //[ForeignKey("UserId")]
+        //public virtual User User { get; protected set; }
+        public virtual long UserId { get; set; }
 
 
         public static Call Create(int tenantId, string code, User user, string description = null)
@@ -40,7 +40,8 @@ namespace NedbankTest.Calls
                 Code = code,
                 Description = description,
                 UserId = @user.Id,
-                User = user
+                IsDeleted =false,
+                //User = user
             };
             return @call;
         }

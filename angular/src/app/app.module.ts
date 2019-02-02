@@ -35,6 +35,7 @@ import { EditRoleDialogComponent } from './roles/edit-role/edit-role-dialog.comp
 import { UsersComponent } from '@app/users/users.component';
 import { CreateUserDialogComponent } from '@app/users/create-user/create-user-dialog.component';
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
+import { CallsComponent } from './calls/calls.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.c
     // users
     UsersComponent,
     CreateUserDialogComponent,
-    EditUserDialogComponent
+    EditUserDialogComponent,
+    CallsComponent
   ],
   imports: [
     CommonModule,

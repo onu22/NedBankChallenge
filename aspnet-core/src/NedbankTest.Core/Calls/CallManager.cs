@@ -16,13 +16,13 @@ namespace NedbankTest.Calls
 
         public async Task<Call> GetAsync(int id)
         {
-            var @call = await _callRepository.FirstOrDefaultAsync(id);
-            if (@call == null)
+            var call = await _callRepository.FirstOrDefaultAsync(id);
+            if (call == null)
             {
                 throw new UserFriendlyException("Could not found the call, maybe it's deleted!");
             }
 
-            return @call;
+            return call;
         }
 
         public async Task CreateAsync(Call @call)
@@ -30,6 +30,9 @@ namespace NedbankTest.Calls
             await _callRepository.InsertAsync(@call);
         }
 
-       
+        public async Task UpdateAsync(Call call)
+        {
+            await _callRepository.UpdateAsync(call);
+        }
     }
 }

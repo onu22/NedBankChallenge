@@ -24,22 +24,38 @@ namespace NedbankTest.Calls
             _callRepository = repository;
         }
 
+
+        public override async Task<CallDto> Update(CallDto input)
+        {
+            try
+            {             
+                var call = await _callManager.GetAsync(input.Id);
+                MapToEntity(input, call);
+                call.UserId= AbpSession.UserId.Value;
+                call.TenantId = 1; //AbpSession.GetTenantId();
+                await _callManager.UpdateAsync(call);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return await Get(input);
+        }
+
         public async Task CreateAsync(CreateCallDto input)
         {
-
             try
             {
-                //var tenantId = AbpSession.GetTenantId();
-
+                var tenantId = 1; //AbpSession.GetTenantId();
                 var user = UserManager.FindByIdAsync(AbpSession.GetUserId().ToString());
-                var @call = Call.Create(1, input.Code, user.Result, input.Description);
+                var @call = Call.Create(tenantId, input.Code, user.Result, input.Description);
                 await _callManager.CreateAsync(@call);
             }
             catch (Exception ex)
             {
                 throw;
             }
-            
+
         }
 
     }

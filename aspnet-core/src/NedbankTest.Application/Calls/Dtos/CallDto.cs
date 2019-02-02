@@ -1,6 +1,7 @@
 ﻿using System;
 using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
+using NedbankTest.Authorization.Users;
 
 namespace NedbankTest.Calls.Dtos
 {
@@ -11,5 +12,8 @@ namespace NedbankTest.Calls.Dtos
 
         public string Description { get; set; }
 
+        public int TenantId { get; set; }
+        public long UserId { get; set; }
+      
     }
 }
