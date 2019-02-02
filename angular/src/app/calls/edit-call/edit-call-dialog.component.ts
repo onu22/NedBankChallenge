@@ -3,8 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
-  TenantServiceProxy,
-  TenantDto,
   CallDto,
   CallServiceProxy
 } from '@shared/service-proxies/service-proxies';
@@ -26,11 +24,11 @@ import {
 export class EditCallDialogComponent extends AppComponentBase 
 implements OnInit {
   saving = false;
-  tenant: CallDto = new CallDto();
+  call: CallDto = new CallDto();
 
   constructor(
     injector: Injector,
-    private _tenantService: CallServiceProxy,
+    private _callService: CallServiceProxy,
     private _dialogRef: MatDialogRef<EditCallDialogComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) private _id: number
   ) {
@@ -38,16 +36,16 @@ implements OnInit {
   }
 
   ngOnInit(): void {
-    this._tenantService.get(this._id).subscribe((result: CallDto) => {
-      this.tenant = result;
+    this._callService.get(this._id).subscribe((result: CallDto) => {
+      this.call = result;
     });
   }
 
   save(): void {
     this.saving = true;
 
-    this._tenantService
-      .update(this.tenant)
+    this._callService
+      .update(this.call)
       .pipe(
         finalize(() => {
           this.saving = false;

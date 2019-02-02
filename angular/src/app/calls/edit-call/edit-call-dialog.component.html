@@ -8,7 +8,7 @@
             matInput
             name="CallCode"
             [placeholder]="'CallCode' | localize"
-            [(ngModel)]="tenant.code"
+            [(ngModel)]="call.code"
             required
             minlength="2"
             maxlength="20"
@@ -19,7 +19,7 @@
             matInput
             name="CallDescription"
             [placeholder]="'CallDescription' | localize"
-            [(ngModel)]="tenant.description"
+            [(ngModel)]="call.description"
             required
             maxlength="128"
           />

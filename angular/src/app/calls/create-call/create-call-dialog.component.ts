@@ -25,7 +25,7 @@ export class CreateCallDialogComponent extends AppComponentBase
  implements OnInit {
 
   saving = false;
-  tenant: CreateCallDto = new CreateCallDto();
+  call: CreateCallDto = new CreateCallDto();
 
   constructor(
     injector: Injector,
@@ -41,10 +41,10 @@ export class CreateCallDialogComponent extends AppComponentBase
   save(): void {
     this.saving = true;
 
-    console.log(this.tenant);
+    console.log(this.call);
     
     this._callService
-      .create(this.tenant)
+      .create(this.call)
       .pipe(
         finalize(() => {
           this.saving = false;

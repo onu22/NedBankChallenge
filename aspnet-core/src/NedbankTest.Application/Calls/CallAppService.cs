@@ -29,8 +29,8 @@ namespace NedbankTest.Calls
         {            
              var call = await _callManager.GetAsync(input.Id);
              MapToEntity(input, call);
-             call.UserId= AbpSession.UserId.Value;
-             call.TenantId = 1; //AbpSession.GetTenantId();
+             //call.UserId= AbpSession.UserId.Value;
+             //call.TenantId = 1; //AbpSession.GetTenantId();
              await _callManager.UpdateAsync(call);            
              return await Get(input);
         }
