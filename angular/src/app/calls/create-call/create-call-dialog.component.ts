@@ -3,8 +3,6 @@ import { MatDialogRef } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
-  CreateTenantDto,
-  TenantServiceProxy,
   CreateCallDto,
   CallServiceProxy
 } from '@shared/service-proxies/service-proxies';
@@ -44,6 +42,8 @@ export class CreateCallDialogComponent extends AppComponentBase
   save(): void {
     this.saving = true;
 
+    console.log(this.tenant);
+    
     this._callService
       .create(this.tenant)
       .pipe(

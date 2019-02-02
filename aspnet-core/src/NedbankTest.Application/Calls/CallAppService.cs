@@ -26,37 +26,44 @@ namespace NedbankTest.Calls
 
 
         public override async Task<CallDto> Update(CallDto input)
-        {
-            try
-            {             
-                var call = await _callManager.GetAsync(input.Id);
-                MapToEntity(input, call);
-                call.UserId= AbpSession.UserId.Value;
-                call.TenantId = 1; //AbpSession.GetTenantId();
-                await _callManager.UpdateAsync(call);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return await Get(input);
+        {            
+             var call = await _callManager.GetAsync(input.Id);
+             MapToEntity(input, call);
+             call.UserId= AbpSession.UserId.Value;
+             call.TenantId = 1; //AbpSession.GetTenantId();
+             await _callManager.UpdateAsync(call);            
+             return await Get(input);
         }
 
-        public async Task CreateAsync(CreateCallDto input)
+
+        public override async Task<CallDto> Create(CreateCallDto input)
         {
-            try
-            {
-                var tenantId = 1; //AbpSession.GetTenantId();
-                var user = UserManager.FindByIdAsync(AbpSession.GetUserId().ToString());
-                var @call = Call.Create(tenantId, input.Code, user.Result, input.Description);
-                await _callManager.CreateAsync(@call);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+
+            //var call = ObjectMapper.Map<Call>(input);
+
+            var tenantId = 1; //AbpSession.GetTenantId();
+            var user = UserManager.FindByIdAsync(AbpSession.GetUserId().ToString());
+
+             var call = await _callManager.CreateAsync(Call.Create(tenantId, input.Code, user.Result, input.Description));
+            return MapToEntityDto(call);
 
         }
+
+        //public async Task CreateAsync(CreateCallDto input)
+        //{
+        //    try
+        //    {
+        //        var tenantId = 1; //AbpSession.GetTenantId();
+        //        var user = UserManager.FindByIdAsync(AbpSession.GetUserId().ToString());
+        //        var @call = Call.Create(tenantId, input.Code, user.Result, input.Description);
+        //        await _callManager.CreateAsync(@call);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+
+        //}
 
     }
 }

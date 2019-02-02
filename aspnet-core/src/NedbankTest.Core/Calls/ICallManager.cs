@@ -12,7 +12,7 @@ namespace NedbankTest.Calls
 
         Task<Call> GetAsync(int id);
 
-        Task CreateAsync(Call @call);
+        Task<Call> CreateAsync(Call @call);
 
         Task UpdateAsync(Call @call);
     }

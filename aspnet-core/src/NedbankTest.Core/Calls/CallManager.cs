@@ -25,9 +25,10 @@ namespace NedbankTest.Calls
             return call;
         }
 
-        public async Task CreateAsync(Call @call)
+        public async Task<Call> CreateAsync(Call input)
         {
-            await _callRepository.InsertAsync(@call);
+            var call = await _callRepository.InsertAsync(input);
+            return call;
         }
 
         public async Task UpdateAsync(Call call)
