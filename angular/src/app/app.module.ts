@@ -36,6 +36,8 @@ import { UsersComponent } from '@app/users/users.component';
 import { CreateUserDialogComponent } from '@app/users/create-user/create-user-dialog.component';
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
 import { CallsComponent } from './calls/calls.component';
+import { CreateCallDialogComponent } from './calls/create-call/create-call-dialog.component';
+import { EditCallDialogComponent } from './calls/edit-call/edit-call-dialog.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,10 @@ import { CallsComponent } from './calls/calls.component';
     UsersComponent,
     CreateUserDialogComponent,
     EditUserDialogComponent,
-    CallsComponent
+    //calls
+    CallsComponent,
+    CreateCallDialogComponent,
+    EditCallDialogComponent
   ],
   imports: [
     CommonModule,
@@ -84,7 +89,11 @@ import { CallsComponent } from './calls/calls.component';
     EditRoleDialogComponent,
     // users
     CreateUserDialogComponent,
-    EditUserDialogComponent
+    EditUserDialogComponent,
+
+    //calls
+    CreateCallDialogComponent,
+    EditCallDialogComponent
   ]
 })
 export class AppModule {}
