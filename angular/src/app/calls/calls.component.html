@@ -38,7 +38,7 @@
           <tbody>
             <tr
               *ngFor="
-                let tenant of (tenants
+                let call of (calls
                   | paginate
                     : {
                         id: 'server',
@@ -48,19 +48,19 @@
                       })
               "
             >
-              <td>{{ tenant.code }}</td>
-              <td>{{ tenant.description }}</td>
+              <td>{{ call.code }}</td>
+              <td>{{ call.description }}</td>
               <td align="center">
                 <i
                   class="material-icons"
-                  *ngIf="tenant.isActive"
+                  *ngIf="call.isActive"
                   style="color:green;"
                 >
                   check_box
                 </i>
                 <i
                   class="material-icons"
-                  *ngIf="!tenant.isActive"
+                  *ngIf="!call.isActive"
                   style="color:red;"
                 >
                   indeterminate_check_box
@@ -71,11 +71,11 @@
                   <mat-icon>menu</mat-icon>
                 </button>
                 <mat-menu #actionsMenu="matMenu">
-                  <button mat-menu-item (click)="editTenant(tenant)">
+                  <button mat-menu-item (click)="editCall(call)">
                     <mat-icon>edit</mat-icon>
                     <span>{{ "Edit" | localize }}</span>
                   </button>
-                  <button mat-menu-item (click)="delete(tenant)">
+                  <button mat-menu-item (click)="delete(call)">
                     <mat-icon>delete</mat-icon>
                     <span>{{ "Delete" | localize }}</span>
                   </button>
@@ -96,7 +96,7 @@
           mat-mini-fab
           color="primary"
           class="pull-right"
-          (click)="createTenant()"
+          (click)="createCall()"
         >
           <mat-icon>add</mat-icon>
         </button>

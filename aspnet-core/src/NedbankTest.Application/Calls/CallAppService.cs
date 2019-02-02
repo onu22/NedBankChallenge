@@ -38,32 +38,11 @@ namespace NedbankTest.Calls
 
         public override async Task<CallDto> Create(CreateCallDto input)
         {
-
-            //var call = ObjectMapper.Map<Call>(input);
-
             var tenantId = 1; //AbpSession.GetTenantId();
             var user = UserManager.FindByIdAsync(AbpSession.GetUserId().ToString());
-
              var call = await _callManager.CreateAsync(Call.Create(tenantId, input.Code, user.Result, input.Description));
             return MapToEntityDto(call);
 
         }
-
-        //public async Task CreateAsync(CreateCallDto input)
-        //{
-        //    try
-        //    {
-        //        var tenantId = 1; //AbpSession.GetTenantId();
-        //        var user = UserManager.FindByIdAsync(AbpSession.GetUserId().ToString());
-        //        var @call = Call.Create(tenantId, input.Code, user.Result, input.Description);
-        //        await _callManager.CreateAsync(@call);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw;
-        //    }
-
-        //}
-
     }
 }

@@ -27,11 +27,11 @@ class PagedCallsRequestDto extends PagedRequestDto {
 })
 export class CallsComponent extends PagedListingComponentBase<CallDto> {
 
-  tenants: CallDto[] = [];
+  calls: CallDto[] = [];
 
   constructor(
       injector: Injector,
-      private _tenantService: CallServiceProxy,
+      private _callService: CallServiceProxy,
       private _dialog: MatDialog
   ) {
       super(injector);
@@ -42,7 +42,7 @@ export class CallsComponent extends PagedListingComponentBase<CallDto> {
     pageNumber: number,
     finishedCallback: Function
 ): void {
-    this._tenantService
+    this._callService
         .getAll(request.maxResultCount,request.skipCount)
         .pipe(
             finalize(() => {
@@ -50,19 +50,19 @@ export class CallsComponent extends PagedListingComponentBase<CallDto> {
             })
         )
         .subscribe((result: PagedResultDtoOfCallDto) => {
-            this.tenants = result.items;
+            this.calls = result.items;
             this.showPaging(result, pageNumber);
         });
 } 
 
 
-delete(tenant: CallDto): void {
+delete(call: CallDto): void {
   abp.message.confirm(
-      this.l('TenantDeleteWarningMessage', tenant.code),
+      this.l('TenantDeleteWarningMessage', call.code),
       (result: boolean) => {
           if (result) {
-              this._tenantService
-                  .delete(tenant.id)
+              this._callService
+                  .delete(call.id)
                   .pipe(
                       finalize(() => {
                           abp.notify.success(this.l('SuccessfullyDeleted'));
@@ -76,25 +76,25 @@ delete(tenant: CallDto): void {
 }
 
 
-createTenant(): void {
+createCall(): void {
   this.showCreateOrEditCallDialog();
 }
 
-editTenant(tenant: CallDto): void {
-  this.showCreateOrEditCallDialog(tenant.id);
+editCall(call: CallDto): void {
+  this.showCreateOrEditCallDialog(call.id);
 }
 
 showCreateOrEditCallDialog(id?: number): void {
-  let createOrEditTenantDialog;
+  let createOrEditCallDialog;
   if (id === undefined || id <= 0) {
-      createOrEditTenantDialog = this._dialog.open(CreateCallDialogComponent);
+      createOrEditCallDialog = this._dialog.open(CreateCallDialogComponent);
   } else {
-      createOrEditTenantDialog = this._dialog.open(EditCallDialogComponent, {
+      createOrEditCallDialog = this._dialog.open(EditCallDialogComponent, {
           data: id
       });
   }
 
-  createOrEditTenantDialog.afterClosed().subscribe(result => {
+  createOrEditCallDialog.afterClosed().subscribe(result => {
       if (result) {
           this.refresh();
       }

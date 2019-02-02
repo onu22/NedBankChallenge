@@ -36,7 +36,6 @@ export class CreateCallDialogComponent extends AppComponentBase
   }
 
   ngOnInit(): void {
-    //this.tenant.isActive = true;
   }
 
   save(): void {
